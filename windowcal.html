@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>WINDOW CALCULATOR</title>
+
+</head>
+
+<body>
+    <main class="container-fluid">
+        <main class="row">
+            <main class="col-sm">
+
+
+                <div class="card card-body">
+                    <div class="nav justify-content-between">
+                        <div style="font-weight: bold;">CALCULATOR</div>
+                        <div class="nav">
+                            <i class="fa fa-window-minimize"></i>
+                            <i class="fa fa-window-maximize"></i>
+                            <i class="fa fa-window-close"></i>
+                        </div>
+                    </div>
+
+                    <div class="card card-body xbody">
+                        <div class="nav">
+                            <p>File</p>
+                            <p>Edit</p>
+                            <p id="help" onclick="help()">Help</p>
+                        </div>
+                        <div class="screen" id="screen">
+                            <div class="d-flex pt-2 pl-2">
+                                <h4 id="demo2" style="padding-left: 10px;">0</h4>
+                                <h4 id="demo3" style="padding-left: 10px; padding-top: 0px;"></h4>
+                                <h4 id="demo1" style="margin-left: 20px; margin-top: 0px;"></h4>
+                            </div>
+                            <h4 id="anss" style="padding-left: 60px !important; margin-top: 30px;"></h4>
+                        </div>
+                        <div class="butall">
+                            <button class="button" id="reset">CE</button>
+                            <button class="button" style="width: 110px !important;" id="equal" onmouseover="eq('a')"
+                                onmouseout="eq('b')">=</button>
+                            <button class="button" id="plus">+</button>
+                            <button class="button" id="minus">-</button>
+                            <button class="button" id="clear"><i class="fa fa-long-arrow-left"></i></button>
+                            <button class="button" value="9" id="nine">9</button>
+                            <button class="button" value="8" id="eight">8</button>
+                            <button class="button" id="plusMinus">+/-</button>
+                            <button class="button" id="sqr">SQR</button>
+                            <button class="button" value="7" id="seven">7</button>
+                            <button class="button" value="6" id="six">6</button>
+                            <button class="button" value="5" id="five">5</button>
+                            <button class="button" id="times">*</button>
+                            <button class="button" id="div">/</button>
+                            <button class="button" value="4" id="four">4</button>
+                            <button class="button" value="3" id="three">3</button>
+                            <button class="button" value="2" id="two">2</button>
+                            <button class="button" value="1" id="one">1</button>
+                            <button class="button" value="0" id="zero">0</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </main>
+    </main>
+
+
+
+
+    <link rel="stylesheet" href="./bootstrap.css">
+    <link rel="stylesheet" href="./windowcal.css">
+</body>
+
+</html>
+
+<script>
+    document.getElementById('nine').addEventListener('click', myFunction)
+    document.getElementById('eight').addEventListener('click', myFunction)
+    document.getElementById('seven').addEventListener('click', myFunction)
+    document.getElementById('six').addEventListener('click', myFunction)
+    document.getElementById('five').addEventListener('click', myFunction)
+    document.getElementById('four').addEventListener('click', myFunction)
+    document.getElementById('three').addEventListener('click', myFunction)
+    document.getElementById('two').addEventListener('click', myFunction)
+    document.getElementById('one').addEventListener('click', myFunction)
+    document.getElementById('zero').addEventListener('click', myFunction)
+    document.getElementById('plus').addEventListener('click', print)
+    document.getElementById('minus').addEventListener('click', print)
+    document.getElementById('div').addEventListener('click', print)
+    document.getElementById('times').addEventListener('click', print)
+    document.getElementById('reset').addEventListener('click', on)
+    document.getElementById('sqr').addEventListener('click', sqroot)
+    document.getElementById('equal').addEventListener('click', answer)
+    document.getElementById('plusMinus').addEventListener('click', pluminu)
+    document.getElementById('clear').addEventListener('click', del)
+
+    let oper = false;
+    let p1, p2, ans, id, newans;
+    let operator;
+    let clear = false;
+    let conf = false;
+    let number = false;
+    let equal = false;
+    let sqr=false;
+    let plumi=false;
+    // document.getElementById('demo1').style.display="none";
+    function print(e) {
+        oper = true;
+        number = true;
+        let c = e.target.innerText;
+        operator = document.getElementById('demo3').innerHTML = c;
+        if (oper == true && equal == true) {
+            if (oper == true) {
+                document.getElementById('demo1').innerHTML = '';
+                document.getElementById('demo2').innerHTML = ans;
+                p1 = ans;
+                p2 = Number(document.getElementById('demo1').innerHTML);
+            }
+
+
+        }
+
+    }
+
+
+    function myFunction(a) {
+        if (document.getElementById('demo2').innerHTML == '0') {
+            document.getElementById('demo2').innerHTML = '';
+        }
+        let b = a.target.innerText;
+        id = a.target.id;
+        if (oper == true && equal == true && number == false) {
+            console.log(number);
+            oper = false;
+            equal = false;
+            p1 = ans;
+            document.getElementById('demo1').innerHTML = '';
+            document.getElementById('demo2').innerHTML = '';
+            document.getElementById('demo3').innerHTML = '';
+        } else {
+            console.log('else', number);
+        }
+        if (oper == false) {
+            document.getElementById('demo2').innerHTML += b
+            p1 = Number(document.getElementById('demo2').innerHTML);
+
+        } else if (oper == true) {
+            document.getElementById('demo3').innerHTML = operator;
+            document.getElementById('demo1').innerHTML += b;
+            p2 = Number(document.getElementById('demo1').innerHTML);
+            if (operator == '+') {
+                ans = (p1 + p2);
+            } else if (operator == '*') {
+                ans = (p1 * p2);
+            }
+
+            else if (operator == '/') {
+                ans = (p1 / p2);
+            }
+
+            else if (operator == '-') {
+                ans = (p1 - p2);
+            }
+
+
+        }
+        // number = true;
+    }
+
+
+
+
+    function answer(z) {
+        equal = true;
+        document.getElementById('anss').innerHTML = `= ${ans}`;
+        number = false;
+        console.log('ans', number);
+    }
+
+
+    function on() {
+        window.location = "windowcal.html";
+    }
+
+    function sqroot(j) {
+        sqr=true;
+        let car = j.target.innerText;
+        conf = car;
+        ans = Math.sqrt(p1);
+        document.getElementById('demo3').innerHTML = car;
+        console.log(oper);
+        if (oper == false) {
+            document.getElementById('demo3').innerHTML = "";
+            document.getElementById('demo2').innerHTML = String(`SQR ${p1}`);
+            p1 = Math.sqrt(p1);
+        }
+        else if (oper == true) {
+            console.log(p2,'p2');
+            console.log(p1,'p1');
+            document.getElementById('demo3').innerHTML = operator;
+            document.getElementById('demo1').innerHTML = String(`SQR ${p2}`);
+            newans = Math.sqrt(p2);
+
+            if (sqr == true && operator == "+") {
+                console.log('plus', p1);
+                console.log(newans);
+                ans = p1 + newans;
+            }
+
+            else if (sqr == true && operator == "-") {
+                console.log('sub', p1);
+                console.log(newans);
+                ans = p1 - newans;
+            }
+            else if (sqr == true && operator == "/") {
+                console.log('div', p1);
+                console.log(newans);
+                ans = p1 / newans;
+            }
+            else if (sqr == true && operator == "*") {
+                console.log('mul', p1);
+                console.log(newans);
+                ans = p1 * newans;
+            }
+        }
+    }
+
+    function pluminu(ret) {
+        plumi=true
+        let plmi = ret.target.innerText;
+        conf = plmi;
+        ans = (-p1);
+        if (oper == false && plumi==true) {
+            p1 = (-p1);
+            document.getElementById('demo2').innerHTML = p1;
+        }
+        else if (oper==true && plumi==true) {
+            newans = Number(p2 * -1)
+            document.getElementById('demo1').innerHTML=`${newans}`
+            if (plumi==true && operator == "+") {
+                console.log('plus', p1);
+                console.log(newans);
+                ans = p1 + newans;
+            }
+
+            else if (plumi==true && operator == "-") {
+                console.log('sub', p1);
+                console.log(newans);
+                ans = p1 - newans;
+            }
+            else if (plumi==true && operator == "/") {
+                console.log('div', p1);
+                console.log(newans);
+                ans = p1 / newans;
+            }
+            else if (plumi==true && operator == "*") {
+                console.log('mul', p1);
+                console.log(newans);
+                ans = p1 * newans;
+            }
+        }
+    }
+
+    function eq(event) {
+        equall = true;
+        if (oper == false) {
+            document.getElementById('equal').style.backgroundColor = "orange";
+            if (event == "b") {
+                document.getElementById('equal').style.backgroundColor = "transparent";
+            }
+            if (conf == "SQR") {
+                document.getElementById('equal').style.backgroundColor = "red";
+                if (event == "b") {
+                    document.getElementById('equal').style.backgroundColor = "transparent";
+                }
+            }
+            else if (conf == "+/-") {
+                document.getElementById('equal').style.backgroundColor = "red";
+                if (event == "b") {
+                    document.getElementById('equal').style.backgroundColor = "transparent";
+                }
+            }
+        }
+        else if (oper == true) {
+            if (event == 'a' && equall == true) {
+                document.getElementById('equal').style.backgroundColor = "red";
+            }
+            else if (event == 'b') {
+                document.getElementById('equal').style.backgroundColor = "transparent";
+            }
+        }
+
+    }
+
+    function help() {
+        document.getElementById('screen').style.padding = "20px";
+        document.getElementById('screen').innerHTML = "Please Press number before you press function button e.g SQR and +/-. Use CE button to reset. Thanks";
+        let a = setTimeout(() => {
+            document.getElementById('screen').innerHTML = "";
+        }, 10000);
+    }
+
+    function del(z) {
+        clear = true;
+        let a = document.getElementById('demo2').innerHTML;
+        let b = document.getElementById('demo1').innerHTML;
+        let c = document.getElementById('demo3').innerHTML;
+        if (b != "") {
+            let va = document.getElementById('demo1').innerHTML.replace(document.getElementById('demo1').innerHTML.slice(-1), "");
+            document.getElementById('demo1').innerHTML = "";
+            document.getElementById('demo1').innerHTML = (va);
+            // console.log(va);
+            newans = Number(document.getElementById('demo1').innerHTML);
+            console.log(id);
+            console.log(clear);
+            console.log(operator);
+            if (clear == true && operator == "+") {
+                console.log('plus', p1);
+                console.log(newans);
+                ans = p1 + newans;
+            }
+
+            else if (clear == true && operator == "-") {
+                console.log('sub', p1);
+                console.log(newans);
+                ans = p1 - newans;
+            }
+            else if (clear == true && operator == "/") {
+                console.log('div', p1);
+                console.log(newans);
+                ans = p1 / newans;
+            }
+            else if (clear == true && operator == "*") {
+                console.log('mul', p1);
+                console.log(newans);
+                ans = p1 * newans;
+            }
+        }
+        else if (a != "") {
+            let onevar = document.getElementById('demo2').innerHTML.replace(document.getElementById('demo2').innerHTML.slice(-1), "");
+            document.getElementById('demo2').innerHTML = (onevar);
+            p1 = Number(document.getElementById('demo2').innerHTML);
+        }
+        else if (a == "" && b == "") {
+            let ta = document.getElementById('demo3').innerHTML.split("");
+            ta.pop();
+            document.getElementById('demo3').innerHTML = ta;
+        }
+
+    }
+
+</script>
